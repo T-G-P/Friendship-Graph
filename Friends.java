@@ -55,12 +55,13 @@ public class Friends{
     }
 
 
-class User{
+	
+	
+	
+}
 
-    /**
-     * True if User is a Student, False if User is not
-     */
-    boolean student;
+
+class User{
 
     /**
      * Name of User
@@ -70,11 +71,13 @@ class User{
     /**
      * Name of User's school.
      */
-    String school;
+    String school; //if school is null, they are not a student
+    
+    Node neighbors; //each user has a linked list of friends
 
 
-    public User(boolean student, String name, String school){
-        this.student = student;
+    public User(String name, String school){
+
         this.name = name;
         this.school = school;
     }
@@ -83,34 +86,22 @@ class User{
 }
 
 class Graph{
-    /**
-     * This will create the main graph
-     */
-    DATASTRUCTURE mainGraph;
+	
+	Scanner sc;//being passed into constructor
+	HashMap<String, User> graph;
+	
+	public Graph(Scanner sc){
+		this.sc = sc;
 
-    /**
-     * This will create the sub graph
-     */
-    DATASTRUCTURE subGraph;
+	}
 
-    /**
-     * This scanner object contains the file inputed by the user.
-     */
-    Scanner sc;
-
-    public Graph(Scanner sc){
-        this.sc = sc;
-        subGraph = null;
-        mainGraph = null;
+    public void buildGraph(){
+    	graph = new HashMap<String, User>();
+    	
+    	
     }
 
-    public graphBuild(){
-        //builds the graph
-    }
-
-    public graphBuildSub(){
-        //builds the subgraph
-    }
+   
 
 
 }
