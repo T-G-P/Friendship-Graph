@@ -21,17 +21,12 @@ public class Friends{
         }
         return response;
     }
-    public static void main(String[] args){
-        //buildGraph
-        //shortestPath
-        //printClique
-        //Graph Class
-        //fields: mainGraph, subGraph
-        //printConnectors
+    public static void main(String[] args) throws FileNotFoundException{
+       
         System.out.print("Enter the input file name => ");
         String graphFile = stdin.next();
-        //Graph graph = new Graph(new Scanner(new File(graphFile)));
-        //graph.buildGraph();
+        Graph graph = new Graph(new Scanner(new File(graphFile)));
+        graph.buildGraph();
         char option;
         while ((option = getOption()) != 'q') {
             if (option == '1') {
@@ -53,55 +48,10 @@ public class Friends{
         }
 
     }
-
-
-	
-	
 	
 }
 
 
-class User{
-
-    /**
-     * Name of User
-     */
-    String name;
-
-    /**
-     * Name of User's school.
-     */
-    String school; //if school is null, they are not a student
-    
-    Node neighbors; //each user has a linked list of friends
 
 
-    public User(String name, String school){
 
-        this.name = name;
-        this.school = school;
-    }
-
-
-}
-
-class Graph{
-	
-	Scanner sc;//being passed into constructor
-	HashMap<String, User> graph;
-	
-	public Graph(Scanner sc){
-		this.sc = sc;
-
-	}
-
-    public void buildGraph(){
-    	graph = new HashMap<String, User>();
-    	
-    	
-    }
-
-   
-
-
-}
