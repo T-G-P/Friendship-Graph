@@ -26,11 +26,20 @@ public class Graph {
     	graph = new HashMap<String, User>();
     	while(graph.size() <= numPeople && sc.hasNext()){
     		User temp = getUser(sc.next());
+    		System.out.print(temp);
     		graph.put(temp.name, temp);
     	}
     	
+    	printGraph(graph);
+    	
     }
     
+    private void printGraph(HashMap<String, User> graph){
+    	for(String name: graph.keySet()){
+    		System.out.println(graph.get(name));
+    	}
+    	
+    }
     
     private User getUser(String line){
     	 String splitStrings[] = line.split("|");
