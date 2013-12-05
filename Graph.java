@@ -21,14 +21,14 @@ public class Graph {
 		}
     	System.out.println(sc.useDelimiter("|"));*/
 
-    	int numPeople = Integer.parseInt(sc.next());
+    	int numPeople = Integer.parseInt(sc.nextLine());
     	System.out.print(numPeople);
     	graph = new HashMap<String, User>();
-    	while(graph.size() <= numPeople){
+    	while(graph.size() <= numPeople && sc.hasNext()){
     		User temp = getUser(sc.next());
     		graph.put(temp.name, temp);
     	}
-    	System.out.println(graph);
+    	
     }
     
     
