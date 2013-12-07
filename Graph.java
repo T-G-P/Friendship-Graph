@@ -10,7 +10,11 @@ public class Graph {
 	public Graph(Scanner sc){
 		this.sc = sc;
 	}
-
+	
+	  /**
+     * This method has two loops, the first fills the hashtables with nodes containing a user object as the data.
+     * The second loop creates an array list of each persons complete list of friends
+     */
     public void buildGraph(){
 
     	int numPeople = Integer.parseInt(sc.nextLine());
@@ -51,12 +55,22 @@ public class Graph {
     	return friend.data.name+" is friends with: "+answer;
     }
     
+    /**
+    * Prints user and the friends they have
+    */
+        
     private void printGraph(HashMap<String, Node> graph){
     	for(String name: graph.keySet()){
     		System.out.println(printList(graph.get(name)));
     	}
     	
     }
+    
+    /**
+    * populates the user class objects
+    * @param line this string is the line of the format "name|y/n|school"
+    * @return returns a populated user object
+    */
     
     private User makeUser(String line){
     	line.toLowerCase();
@@ -69,6 +83,13 @@ public class Graph {
     	return person;
     	     	   	
     }
+    
+    /**
+    * Completes an array list of friends, recurses to reach end of list.
+    * @param firstFriend
+    * @param secondFriend
+    */
+    
     private void makeFriendships(Node firstFriend, Node secondFriend) {
     	if(firstFriend.next == null){
     		firstFriend.next = secondFriend;
@@ -79,6 +100,10 @@ public class Graph {
     }
     
     
+    /**
+    * Prints out user object
+    * @param person
+    */
     
     public void printUser(User person) {
     	System.out.println("Name: " + person.name);
