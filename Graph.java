@@ -19,8 +19,16 @@ public class Graph {
     		Node temp = new Node(makeUser(sc.nextLine()), null);
     		graph.put(temp.data.name, temp);
     	}
+    	while(sc.hasNextLine()){
+    		String line = sc.nextLine();
+    		line.toLowerCase();
+    		Scanner sc = new Scanner(line).useDelimiter("\\s*\\|\\s*");
+        	Node firstFriend = graph.get(sc.next());
+        	Node secondFriend = graph.get(sc.next());
+    		makeFriendships(firstFriend, secondFriend);
+    		
+    	}
     	
-    	printGraph(graph);
     	
     }
     
@@ -34,8 +42,7 @@ public class Graph {
     private User makeUser(String line){
     	line.toLowerCase();
     	Scanner sc = new Scanner(line).useDelimiter("\\s*\\|\\s*");
-    	User person = new User(null, null);
-    	
+    	User person = new User(null, null);    	
     	person.name = sc.next();
     	if (sc.next().equals("y")){
     		person.school = sc.next();
@@ -43,6 +50,16 @@ public class Graph {
     	return person;
     	     	   	
     }
+    private void makeFriendships(Node firstFriend, Node secondFriend) {
+    	if(firstFriend.next == null){
+    		firstFriend.next = secondFriend;
+    	} else {
+    		makeFriendships(firstFriend.next, secondFriend);
+    	}
+    	
+    }
+    
+    
     
     public void printUser(User person) {
     	System.out.println("Name: " + person.name);
