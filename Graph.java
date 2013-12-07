@@ -9,23 +9,15 @@ public class Graph {
 	
 	public Graph(Scanner sc){
 		this.sc = sc;
-
 	}
 
     public void buildGraph(){
-    	
-		/*StringTokenizer st = new StringTokenizer(sc.toString(), "|", false);
-		while (st.hasMoreTokens()) {
-			String token = st.nextToken();
-			System.out.println(token);
-		}
-    	System.out.println(sc.useDelimiter("|"));*/
 
     	int numPeople = Integer.parseInt(sc.nextLine());
-    	System.out.print(numPeople);
+    	System.out.println(numPeople);
     	graph = new HashMap<String, User>();
     	while(graph.size() <= numPeople && sc.hasNext()){
-    		User temp = getUser(sc.next());
+    		User temp = makeUser(sc.next());
     		System.out.print(temp);
     		graph.put(temp.name, temp);
     	}
@@ -41,21 +33,24 @@ public class Graph {
     	
     }
     
-    private User getUser(String line){
-    	 String splitStrings[] = line.split("|");
-    	 User person;
-    	 
-    	 try{
-    		 person = new User(splitStrings[0], splitStrings[2], null);
-    	 }catch(IndexOutOfBoundsException e){
-    		 person = new User(splitStrings[0], null, null);
-    	 }
-    	 
-    	 return person;
-    	 
+    private User makeUser(String line){
+    	line.toLowerCase();
+    	Scanner sc = new Scanner(line).useDelimiter("\\s*\\|\\s*");
+    	User person = new User(null, null);
     	
-    	
+    	person.name = sc.next();
+    	if (sc.next().equals("y")){
+    		person.school = sc.next();
+    	}    	 
+    	return person;
+    	     	   	
     }
+    
+    public void printUser(User person) {
+    	System.out.println("Name: " + person.name);
+    	System.out.println("School: " + person.school);
+    	
+	}
 
    
 
