@@ -22,9 +22,9 @@ public class Graph {
     	while(sc.hasNextLine()){
     		String line = sc.nextLine();
     		line.toLowerCase();
-    		Scanner sc = new Scanner(line).useDelimiter("\\s*\\|\\s*");
-        	Node firstFriend = graph.get(sc.next());
-        	Node secondFriend = graph.get(sc.next());
+    		Scanner lineSc = new Scanner(line).useDelimiter("\\s*\\|\\s*");
+        	Node firstFriend = graph.get(lineSc.next());
+        	Node secondFriend = new Node(graph.get(sc.next()).data, null);
     		makeFriendships(firstFriend, secondFriend);
     		
     	}
