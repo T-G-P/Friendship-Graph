@@ -12,7 +12,6 @@ public class Graph {
 	}
 
     public void buildGraph(){
-
     	int numPeople = Integer.parseInt(sc.nextLine());
     	graph = new HashMap<String, Node>();
     	while(graph.size() < numPeople && sc.hasNextLine()){
@@ -21,6 +20,7 @@ public class Graph {
     		//System.out.println(graph.size());
     	}
     	while(sc.hasNextLine()){
+<<<<<<< HEAD
             String line = sc.nextLine();
             line.toLowerCase();
             Scanner lineSc = new Scanner(line).useDelimiter("\\s*\\|\\s*");
@@ -35,6 +35,17 @@ public class Graph {
     	
     	printGraph(graph);
     	
+=======
+    		String line = sc.nextLine();
+    		line.toLowerCase();
+    		Scanner lineSc = new Scanner(line).useDelimiter("\\s*\\|\\s*");
+        	Node firstFriend = graph.get(lineSc.next());
+        	Node secondFriend = new Node(graph.get(lineSc.next()).data, null);
+    		makeFriendships(firstFriend, secondFriend);
+    		
+    	}
+    	printGraph(graph);
+>>>>>>> f7c9e2a55ff594233ee2878d840a8749fc855ea9
     	
     }
     
@@ -53,24 +64,43 @@ public class Graph {
     
     private void printGraph(HashMap<String, Node> graph){
     	for(String name: graph.keySet()){
+<<<<<<< HEAD
     		System.out.println(printList(graph.get(name)));
+=======
+    		System.out.println(graph.get(name).data.name);
+    		Node testFriend = graph.get(name);
+    		while( testFriend.next != null){
+    			System.out.println(" Is Friends With: " + testFriend.data.name);
+    			testFriend = testFriend.next;
+    		}
+>>>>>>> f7c9e2a55ff594233ee2878d840a8749fc855ea9
     	}
     	
     }
     
     private User makeUser(String line){
     	line.toLowerCase();
+<<<<<<< HEAD
     	Scanner Usersc = new Scanner(line).useDelimiter("\\s*\\|\\s*");
     	User person = new User(null, null);    	
     	person.name = Usersc.next();
     	if (Usersc.next().equals("y")){
     		person.school = Usersc.next();
+=======
+    	Scanner makeUserSc = new Scanner(line).useDelimiter("\\s*\\|\\s*");
+    	User person = new User(null, null);    	
+    	person.name = makeUserSc.next();
+    	if (makeUserSc.next().equals("y")){
+    		person.school = makeUserSc.next();
+>>>>>>> f7c9e2a55ff594233ee2878d840a8749fc855ea9
     	}    	 
     	return person;
     	     	   	
     }
     private void makeFriendships(Node firstFriend, Node secondFriend) {
+    	System.out.print("HEEEEEEREEE:   " + firstFriend.data.name);
     	if(firstFriend.next == null){
+    		System.out.prinln("hello");
     		firstFriend.next = secondFriend;
     	} else {
     		makeFriendships(firstFriend.next, secondFriend);
