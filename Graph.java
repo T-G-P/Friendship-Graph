@@ -5,7 +5,7 @@ import java.util.StringTokenizer;
 
 public class Graph {
 	Scanner sc;//being passed into constructor
-	HashMap<String, User> graph;
+	HashMap<String, Node> graph;
 	
 	public Graph(Scanner sc){
 		this.sc = sc;
@@ -14,21 +14,19 @@ public class Graph {
     public void buildGraph(){
 
     	int numPeople = Integer.parseInt(sc.nextLine());
-    	System.out.println(numPeople);
-    	graph = new HashMap<String, User>();
-    	while(graph.size() <= numPeople && sc.hasNext()){
-    		User temp = makeUser(sc.next());
-    		System.out.print(temp);
-    		graph.put(temp.name, temp);
+    	graph = new HashMap<String, Node>();
+    	while(graph.size() <= numPeople && sc.hasNextLine()){
+    		Node temp = new Node(makeUser(sc.nextLine()), null);
+    		graph.put(temp.data.name, temp);
     	}
     	
     	printGraph(graph);
     	
     }
     
-    private void printGraph(HashMap<String, User> graph){
+    private void printGraph(HashMap<String, Node> graph){
     	for(String name: graph.keySet()){
-    		System.out.println(graph.get(name));
+    		System.out.println(graph.get(name).data.name);
     	}
     	
     }
