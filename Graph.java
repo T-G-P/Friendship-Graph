@@ -2,39 +2,19 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-/**
- * Graph Class
- * 
- * @author Raphael Kelly
- * @author Tobias Perelstein 
- */
 
 public class Graph {
 	Scanner sc;//being passed into constructor
-	HashMap<String, Node> graph, subGraph;
+	HashMap<String, Node> graph;
 	
-	/**
-	 * Constructor Method
-	 */
 	public Graph(Scanner sc){
 		this.sc = sc;
-<<<<<<< HEAD
-	}	
-	
-	
-	
-	/**
-	 * This method has two loops, the first fills the hashtables with nodes containing a user object as the data. 
-	 * The second loop creates an linked list of each persons complete list of friends
-	 */
-=======
 	}
 	
 	  /**
      * This method has two loops, the first fills the hashtables with nodes containing a user object as the data.
      * The second loop creates an array list of each persons complete list of friends
      */
->>>>>>> 8002673a021d6b213836a19b09371a9e81b48e73
     public void buildGraph(){
 
     	int numPeople = Integer.parseInt(sc.nextLine());
@@ -56,11 +36,8 @@ public class Graph {
             makeFriendships(secondFriend, firstFriendCopy);
             
     	}
-<<<<<<< HEAD
-=======
     	
     	printGraph(graph);
->>>>>>> 8002673a021d6b213836a19b09371a9e81b48e73
     	
     	
     }
@@ -79,28 +56,15 @@ public class Graph {
     }
     
     /**
-<<<<<<< HEAD
-     * Creates a subgraph of friendships within a school.
-     * @param school
-     */
-    public void subGraph(String school){
-    	subGraph = new HashMap<String, Node>();
-    	for (String name: graph.keySet()){
-    		if(graph.get(name)!= null && graph.get(name).data.school.equals(school)){
-    			subGraph.put(name, graph.get(name));
-    		}
-=======
     * Prints user and the friends they have
     */
         
     private void printGraph(HashMap<String, Node> graph){
     	for(String name: graph.keySet()){
     		System.out.println(printList(graph.get(name)));
->>>>>>> 8002673a021d6b213836a19b09371a9e81b48e73
     	}
+    	
     }
-    
-    
     
     /**
     * populates the user class objects
@@ -121,18 +85,11 @@ public class Graph {
     }
     
     /**
-<<<<<<< HEAD
-     * Completes an linked list of friends, recurses to reach end of list. 
-     * @param firstFriend
-     * @param secondFriend
-     */
-=======
     * Completes an array list of friends, recurses to reach end of list.
     * @param firstFriend
     * @param secondFriend
     */
     
->>>>>>> 8002673a021d6b213836a19b09371a9e81b48e73
     private void makeFriendships(Node firstFriend, Node secondFriend) {
     	if(firstFriend.next == null){
     		firstFriend.next = secondFriend;
@@ -153,43 +110,7 @@ public class Graph {
     	System.out.println("School: " + person.school);
     	
 	}
-    
-    
-    /**
-     * Prints user and the friends they have
-     */
-    
-    private void printGraph(HashMap<String, Node> graph){
-    	for(String name: graph.keySet()){
-    		System.out.println(graph.get(name).data.name);
-    		Node testFriend = graph.get(name);
-    		while( testFriend.next != null){
-    			testFriend = testFriend.next;
-    			System.out.println(" Is Friends With: " + testFriend.data.name);
-    			
-    		}
-    	}
-    	
-    }
-    
-    /**
-     * Prints user and the friends they have
-     */
-    
-    private String printList(Node friend){
-        Node ptr;
-        String answer = "";
-        for(ptr=friend; ptr!=null; ptr=ptr.next){
-                
-                if(ptr==friend){
-                        continue;
-                }
-                answer+=(ptr.data.name+" ");
-        }
-        return friend.data.name+" is friends with: "+answer;
-    }
 
-    
-    
+   
 
 }
