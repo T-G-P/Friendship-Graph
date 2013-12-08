@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.StringTokenizer;
@@ -45,6 +46,7 @@ public class Graph {
                     makeFriendships(secondFriend, firstFriendCopy);
                     
             }
+            printGraph(graph);
             
     }
     
@@ -156,6 +158,48 @@ public class Graph {
         }
         return friend.data.name+" is friends with: "+answer;
     }
+
+
+    
+    public boolean BFS(String source, String target){
+    	Queue<Node> q = new Queue<Node>();
+    	Node start = graph.get(source);
+    	q.enqueue(start);
+    	ArrayList<Node> visited = new ArrayList<Node>();
+    	ArrayList<String> previous = new ArrayList<String>();
+    	visited.add(start);
+    	
+    	
+    	while(!(q.isEmpty())){
+        	Node temp = graph.get(q.dequeue().data.name);
+        	//visited.add(temp);
+        	previous.add(temp.data.name);
+        	
+    		if(temp.data.name.equals(target)){
+    			return true;
+    		}
+    		else{
+    			for(Node ptr=temp; ptr!=null; ptr=ptr.next){
+    				if(!(visited.contains(ptr))){
+    					q.enqueue(ptr);	
+    					visited.add(ptr);
+    					
+    				}
+    				
+    			}
+    			
+    		}
+    		for(int i = 0; i<visited.size(); i++){
+    			System.out.println(visited.get(i).data.name);
+    		}
+    		
+    	}
+    	
+    	return false;
+    }
+
+   
+
 
     
     
