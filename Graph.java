@@ -46,6 +46,8 @@ public class Graph {
                     
             }
             
+            printGraph(graph);
+            
     }
     
     /**
@@ -55,7 +57,7 @@ public class Graph {
     public void subGraph(String school){
             subGraph = new HashMap<String, Node>();
             for (String name: graph.keySet()){
-                    if(graph.get(name)!= null && graph.get(name).data.school.equals(school)){
+                    if(graph.get(name).data.school.equals(school)){
                             subGraph.put(name, graph.get(name));
                     }
             }
@@ -123,25 +125,5 @@ public class Graph {
             }
             
     }
-    
-    /**
-* Prints user and the friends they have
-*/
-    
-    private String printList(Node friend){
-        Node ptr;
-        String answer = "";
-        for(ptr=friend; ptr!=null; ptr=ptr.next){
-                
-                if(ptr==friend){
-                        continue;
-                }
-                answer+=(ptr.data.name+" ");
-        }
-        return friend.data.name+" is friends with: "+answer;
-    }
-
-    
-    
 
 }
