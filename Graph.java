@@ -52,55 +52,64 @@ public class Graph {
     }
     
     /**
-     * Creates a subgraph of friendships within a school.
+     * Creates a subgraph of friendships within a school and prints them out in graph input format. 
      * @param school
      */
     public void subGraph(String school){
             subGraph = new HashMap<String, Node>();
-            int i = 0;
-            Stack<ArrayList<String>> qf = new Stack<ArrayList<String>>();
             for (String name: graph.keySet()){
                     if(graph.get(name).data.school != null && graph.get(name).data.school.equals(school)){
                             subGraph.put(name, scanFriends(school, graph.get(name)));
                     }
             }
-            System.out.println(subGraph.size());
-            for (String name: subGraph.keySet()){
-            	char student;
-            	if (subGraph.get(name).data.school != null){
-            		student = 'y';
-            	} else {
-            		student = 'n';
-            	}
-            	if (student == 'n'){
-            		System.out.println(subGraph.get(name).data.name + "|" + student );
-            	} else {
-            		System.out.println(subGraph.get(name).data.name + "|" + student + "|" + subGraph.get(name).data.school );
-            	}
-            }
-            for (String friendAlpha: subGraph.keySet()){
-            	Node friendBeta = subGraph.get(friendAlpha);
-            	while(friendBeta.next != null){
-            		friendBeta = friendBeta.next;
-            		ArrayList<String> twoFriends = new ArrayList<>(2);
-            		twoFriends.add(friendAlpha);
-            		twoFriends.add(friendBeta.data.name);
-            		qf.push(twoFriends);
-            	}
-            	
-            }
-            while (!qf.empty()){
-            	ArrayList<String> test = qf.pop();
-            	ArrayList<String> reverse = new ArrayList<String>(2);
-            	reverse.add(test.get(1));
-            	reverse.add(test.get(0));
-            	if (!qf.contains(reverse)){
-            		System.out.println(reverse.get(0) + "|" + reverse.get(1));
-            	}
-            }
-            
-            
     }
+    
+    
+    public void buildCliques(){
+    	
+    }
+    
+    public void printSubGraph(){
+
+        Stack<ArrayList<String>> qf = new Stack<ArrayList<String>>();
+        System.out.println(subGraph.size());
+        for (String name: subGraph.keySet()){
+        	char student;
+        	if (subGraph.get(name).data.school != null){
+        		student = 'y';
+        	} else {
+        		student = 'n';
+        	}
+        	if (student == 'n'){
+        		System.out.println(subGraph.get(name).data.name + "|" + student );
+        	} else {
+        		System.out.println(subGraph.get(name).data.name + "|" + student + "|" + subGraph.get(name).data.school );
+        	}
+        }
+        for (String friendAlpha: subGraph.keySet()){
+        	Node friendBeta = subGraph.get(friendAlpha);
+        	while(friendBeta.next != null){
+        		friendBeta = friendBeta.next;
+        		ArrayList<String> twoFriends = new ArrayList<>(2);
+        		twoFriends.add(friendAlpha);
+        		twoFriends.add(friendBeta.data.name);
+        		qf.push(twoFriends);
+        	}
+        	
+        }
+        while (!qf.empty()){
+        	ArrayList<String> test = qf.pop();
+        	ArrayList<String> reverse = new ArrayList<String>(2);
+        	reverse.add(test.get(1));
+        	reverse.add(test.get(0));
+        	if (!qf.contains(reverse)){
+        		System.out.println(reverse.get(0) + "|" + reverse.get(1));
+        	}
+        }
+        
+        
+    }
+    
     
     /**
      * 

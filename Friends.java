@@ -33,6 +33,7 @@ public class Friends{
             	System.out.println ("Which school?");
             	String school = stdin.next().toLowerCase();
                 graph.subGraph(school);
+                graph.printSubGraph();
             } else if (option == '2') {
                 System.out.print("2");
 
