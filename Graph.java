@@ -49,25 +49,41 @@ public class Graph {
     }
     
     /**
-* Creates a subgraph of friendships within a school.
-* @param school
-*/
+     * Creates a subgraph of friendships within a school.
+     * @param school
+     */
     public void subGraph(String school){
             subGraph = new HashMap<String, Node>();
             for (String name: graph.keySet()){
-                    if(graph.get(name)!= null && graph.get(name).data.school.equals(school)){
-                            subGraph.put(name, graph.get(name));
+                    if(graph.get(name).data.school != null && graph.get(name).data.school.equals(school)){
+                            subGraph.put(name, scanFriends(school, graph.get(name)));
                     }
             }
+            
+    }
+    
+    /**
+     * 
+     */
+    public Node scanFriends(String school, Node person){
+    	if (person.next != null){
+    		person.next = scanFriends(school, person.next);
+    	}
+    	if (person.data.school != null && person.data.school.equals(school)){
+    		return person; 
+    	} else {
+    		return person.next;
+    	}
     }
     
     
     
+    
     /**
-* populates the user class objects
-* @param line this string is the line of the format "name|y/n|school"
-* @return returns a populated user object
-*/
+     * populates the user class objects
+     * @param line this string is the line of the format "name|y/n|school"
+     * @return returns a populated user object
+     */
     
     private User makeUser(String line){
             line.toLowerCase();
@@ -82,10 +98,10 @@ public class Graph {
     }
     
     /**
-* Completes an linked list of friends, recurses to reach end of list.
-* @param firstFriend
-* @param secondFriend
-*/
+     * Completes an linked list of friends, recurses to reach end of list.
+     * @param firstFriend
+     * @param secondFriend
+     */
     private void makeFriendships(Node firstFriend, Node secondFriend) {
             if(firstFriend.next == null){
                     firstFriend.next = secondFriend;
@@ -97,9 +113,9 @@ public class Graph {
     
     
     /**
-* Prints out user object
-* @param person
-*/
+     * Prints out user object
+     * @param person
+     */
     public void printUser(User person) {
             System.out.println("Name: " + person.name);
             System.out.println("School: " + person.school);
@@ -108,10 +124,10 @@ public class Graph {
     
     
     /**
-* Prints user and the friends they have
-*/
+     * Prints user and the friends they have
+     */
     
-    private void printGraph(HashMap<String, Node> graph){
+    void printGraph(HashMap<String, Node> graph){
             for(String name: graph.keySet()){
                     System.out.println(graph.get(name).data.name);
                     Node testFriend = graph.get(name);
@@ -125,8 +141,8 @@ public class Graph {
     }
     
     /**
-* Prints user and the friends they have
-*/
+     * Prints user and the friends they have
+     */
     
     private String printList(Node friend){
         Node ptr;

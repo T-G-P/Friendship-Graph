@@ -30,7 +30,10 @@ public class Friends{
         char option;
         while ((option = getOption()) != 'q') {
             if (option == '1') {
-                System.out.print("1");
+            	System.out.println ("Which school?");
+            	String school = stdin.next().toLowerCase();
+                graph.subGraph(school);
+                graph.printGraph(graph.subGraph);
             } else if (option == '2') {
                 System.out.print("2");
 
