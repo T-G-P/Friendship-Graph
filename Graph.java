@@ -14,7 +14,7 @@ import java.util.StringTokenizer;
 
 public class Graph {
         Scanner sc;//being passed into constructor
-        HashMap<String, Node> graph, subGraph;
+        HashMap<String, Node> graph;
         
     /**
      * Constructor Method
@@ -55,21 +55,22 @@ public class Graph {
      * Creates a subgraph of friendships within a school and prints them out in graph input format. 
      * @param school
      */
-    public void subGraph(String school){
-            subGraph = new HashMap<String, Node>();
+    public HashMap<String,Node> subGraph(String school){
+            HashMap<String,Node> subGraph = new HashMap<String, Node>();
             for (String name: graph.keySet()){
                     if(graph.get(name).data.school != null && graph.get(name).data.school.equals(school)){
                             subGraph.put(name, scanFriends(school, graph.get(name)));
                     }
             }
+            return subGraph;
     }
     
     
     public void buildCliques(){
-    	
+    		
     }
     
-    public void printSubGraph(){
+    public void printSubGraph(HashMap<String, Node> subGraph){
 
         Stack<ArrayList<String>> qf = new Stack<ArrayList<String>>();
         System.out.println(subGraph.size());
