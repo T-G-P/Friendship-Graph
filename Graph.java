@@ -1,6 +1,9 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Stack;
 import java.util.StringTokenizer;
+
 
 /**
 * Graph Class
@@ -54,6 +57,8 @@ public class Graph {
      */
     public void subGraph(String school){
             subGraph = new HashMap<String, Node>();
+            int i = 0;
+            Stack<ArrayList<String>> qf = new Stack<ArrayList<String>>();
             for (String name: graph.keySet()){
                     if(graph.get(name).data.school != null && graph.get(name).data.school.equals(school)){
                             subGraph.put(name, scanFriends(school, graph.get(name)));
@@ -71,6 +76,31 @@ public class Graph {
             		System.out.println(subGraph.get(name).data.name + "|" + student );
             	} else {
             		System.out.println(subGraph.get(name).data.name + "|" + student + "|" + subGraph.get(name).data.school );
+            	}
+            }
+            printGraph(subGraph);
+            for (String friendAlpha: subGraph.keySet()){
+            	Node friendBeta = subGraph.get(friendAlpha).next;
+            	System.out.println("Here: "+ i);
+            	while(friendBeta.next != null){
+            		System.out.println(i);
+            		ArrayList<String> twoFriends = new ArrayList<>(2);
+            		twoFriends.add(friendAlpha);
+            		twoFriends.add(friendBeta.data.name);
+            		qf.push(twoFriends);
+            		friendBeta = friendBeta.next;
+            		i++;
+            	}
+            	
+            }
+            System.out.println(qf.size());
+            while (!qf.empty()){
+            	ArrayList<String> test = qf.pop();
+            	ArrayList<String> reverse = new ArrayList<String>(2);
+            	reverse.add(test.get(1));
+            	reverse.add(test.get(0));
+            	if (!qf.contains(reverse)){
+            		System.out.println(reverse.get(0) + "|" + reverse.get(1));
             	}
             }
             

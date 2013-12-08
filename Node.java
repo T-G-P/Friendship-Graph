@@ -5,5 +5,6 @@ public class Node {
 	public Node(User data, Node next) {
 		this.data = data;
 		this.next = next;
+		
 	}
 }
