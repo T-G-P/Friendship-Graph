@@ -2,6 +2,7 @@
 import java.util.ArrayList;
 //import java.util.HashMap;
 //import java.util.Set;
+import java.util.HashMap;
 
 public class BreadthFirstSearch {
 
@@ -20,14 +21,14 @@ public class BreadthFirstSearch {
 	 * Requires: src != null, dst != null and must have a name (e.g.
 	 * cannot be an empty string).
 	 */
-	public static ArrayList<Node> bfs(Graph graph, Node src, Node dst) {
+	public static ArrayList<Node> bfs(HashMap<String, Node> graph, Node src, Node dst) {
 		shortestPath.clear();
 		
 		// A list that stores the path.
 		ArrayList<Node> path = new ArrayList<Node>();
 		
 		// If the source is the same as destination, I'm done.
-		if (src.data.name.equals(dst.data.name) && graph.graph.containsKey(src.data.name)) {
+		if (src.data.name.equals(dst.data.name) && graph.containsKey(src.data.name)) {
 			path.add(src);
 			return path;
 		}
@@ -44,7 +45,12 @@ public class BreadthFirstSearch {
 			visited.enqueue(v);
 			
 			// Search reachableList of v.
-			ArrayList<Node> reachableList = graph.getNeighbours(v);
+			v.getNeighbours(v);
+			ArrayList<Node> reachableList = new ArrayList<Node>();
+
+			for(Node ptr = v; ptr!=null; ptr=ptr.next){
+				reachableList.add(ptr);
+			}
 			int i = 0;
 			while (i != reachableList.size()) {
 				// Extracts the next neighbour of v.
@@ -55,7 +61,7 @@ public class BreadthFirstSearch {
 				
 				if (neighbour.equals(dst)) {
 					// Process path
-					//System.out.println(processPath(src, dst, path));
+					System.out.println(processPath(src, dst, path));
 					return processPath(src, dst, path);
 				}
 				else {
