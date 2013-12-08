@@ -78,22 +78,17 @@ public class Graph {
             		System.out.println(subGraph.get(name).data.name + "|" + student + "|" + subGraph.get(name).data.school );
             	}
             }
-            printGraph(subGraph);
             for (String friendAlpha: subGraph.keySet()){
-            	Node friendBeta = subGraph.get(friendAlpha).next;
-            	System.out.println("Here: "+ i);
+            	Node friendBeta = subGraph.get(friendAlpha);
             	while(friendBeta.next != null){
-            		System.out.println(i);
+            		friendBeta = friendBeta.next;
             		ArrayList<String> twoFriends = new ArrayList<>(2);
             		twoFriends.add(friendAlpha);
             		twoFriends.add(friendBeta.data.name);
             		qf.push(twoFriends);
-            		friendBeta = friendBeta.next;
-            		i++;
             	}
             	
             }
-            System.out.println(qf.size());
             while (!qf.empty()){
             	ArrayList<String> test = qf.pop();
             	ArrayList<String> reverse = new ArrayList<String>(2);
