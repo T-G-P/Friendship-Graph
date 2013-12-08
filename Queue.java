@@ -1,9 +1,8 @@
-
 import java.util.NoSuchElementException;
 
 public class Queue<T> {
 	
-	private Node rear;
+	private SeshNode<T> rear;
 	private int size;
 	
 	public Queue() {
@@ -11,8 +10,8 @@ public class Queue<T> {
 		size = 0;
 	}
 
-	public void enqueue(Node item) {
-		Node newItem = new Node(item.data, null);
+	public void enqueue(T item) {
+		SeshNode<T> newItem = new SeshNode<T>(item, null);
 		if (rear == null) {
 			newItem.next = newItem;
 		} else {
@@ -23,12 +22,12 @@ public class Queue<T> {
 		rear = newItem;
 	}
 	
-	public Node dequeue() 
+	public T dequeue() 
 	throws NoSuchElementException {
 		if (rear == null) {
 			throw new NoSuchElementException("queue is empty");
 		}
-		Node data = rear.next;
+		T data = rear.next.data;
 		if (rear == rear.next) {
 			rear = null;
 		} else {
@@ -46,29 +45,16 @@ public class Queue<T> {
 		return size == 0;
 	}
 	
-	public boolean contains(Queue T, Node person){
-		while(!(T.isEmpty())){
-			if(person.data.name.equals(T.peek().data.name)){
-				return true;
-			}
-			else{
-				T.dequeue();
-			}
-		}
-			
-		return false;
-	}
-	
 	public void clear() {
 		size = 0;
 		rear = null;
 	}
 	
-	public Node peek() 
+	public T peek() 
 			throws NoSuchElementException {
 		if (rear == null) {
 			throw new NoSuchElementException("queue is empty");
 		}
-		return rear.next;				
+		return rear.next.data;				
 	}
 }

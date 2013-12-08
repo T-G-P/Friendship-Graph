@@ -16,5 +16,9 @@ public class User {
         this.school = school;
         
     }
+    
+    public boolean equals(User u){
+    	return u.name.equals(this.name);
+    }
 
 }
