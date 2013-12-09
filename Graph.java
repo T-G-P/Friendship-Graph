@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Stack;
 import java.util.StringTokenizer;
 
 /**
@@ -146,42 +147,56 @@ public class Graph {
      * Prints user and the friends they have
      */
     
-    private String printList(Node friend){
-        Node ptr;
-        String answer = "";
-        for(ptr=friend; ptr!=null; ptr=ptr.next){
-                
-                if(ptr==friend){
-                        continue;
-                }
-                answer+=(ptr.data.name+" ");
-        }
-        return friend.data.name+" is friends with: "+answer;
-    }
+    /*private String printList(String path){
+      String answer = "";
+      String delims = "[],";
+    	for(int i = 0; i<path.length(); i++){
+    		if(!(path.charAt(i)=='[' || path.charAt(i)==']' || path.charAt(i)==',')){
+    			answer+=path.charAt(i)+"--";
+    		}
+    	}
+      return answer;
+    }*/
+    	  
 
 
     
-    public boolean BFS(String source, String target){
+    public String BFS(String source, String target){
+    	Queue<ArrayList<String>> paths = new Queue<ArrayList<String>>();
+    	ArrayList<String> path = new ArrayList<String>();
     	Queue<Node> q = new Queue<Node>();
     	Node start = graph.get(source);
     	q.enqueue(start);
     	ArrayList<Node> visited = new ArrayList<Node>();
-    	ArrayList<String> previous = new ArrayList<String>();
+    	
+    	//ArrayList<String> previous = new ArrayList<String>();
     	visited.add(start);
+    	path.add(start.data.name);
+    	paths.enqueue(path);
     	
     	
     	while(!(q.isEmpty())){
         	Node temp = graph.get(q.dequeue().data.name);
+        	ArrayList<String> tempPath = paths.dequeue();
         	//visited.add(temp);
-        	previous.add(temp.data.name);
+        	//previous.add(temp.data.name);
         	
     		if(temp.data.name.equals(target)){
-    			return true;
+    			String answer="";
+    			for(int i = 0; i<tempPath.size(); i++){
+    				answer+=tempPath.get(i)+"--";
+    				
+    			}
+    			answer = answer.substring(0,(answer.length()-2));
+    			return answer;
     		}
     		else{
     			for(Node ptr=temp; ptr!=null; ptr=ptr.next){
     				if(!(visited.contains(ptr))){
-    					q.enqueue(ptr);	
+    					q.enqueue(ptr);
+    					ArrayList<String> tempPathCopy = new ArrayList<String>(tempPath);
+    					tempPathCopy.add(ptr.data.name);
+    					paths.enqueue(tempPathCopy);
     					visited.add(ptr);
     					
     				}
@@ -195,13 +210,7 @@ public class Graph {
     		
     	}
     	
-    	return false;
+    	return "No Path ExiZts";
     }
-
-   
-
-
-    
-    
 
 }
