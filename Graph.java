@@ -15,6 +15,7 @@ import java.util.StringTokenizer;
 public class Graph {
         Scanner sc;//being passed into constructor
         HashMap<String, Node> graph;
+		ArrayList<String> visited = new ArrayList<String>();
         
     /**
      * Constructor Method
@@ -48,7 +49,6 @@ public class Graph {
                     makeFriendships(secondFriend, firstFriendCopy);
                     
             }
-            printGraph(graph);
             
     }
     
@@ -67,8 +67,20 @@ public class Graph {
     }
     
     
-    public void buildCliques(){
-    		
+    public void buildCliques(HashMap<String,Node> subGraph){
+    		int i = 1 ;
+    		HashMap<String, Node> resultMap = new HashMap<String, Node>();
+    		for (String name: subGraph.keySet()){
+    			if (!visited.contains(subGraph.get(name))){
+    				resultMap = dfs(subGraph, subGraph.get(name));
+    				System.out.println("Clique" + i + " 1:");
+    				i++;
+    			}
+    		}
+    }	
+    
+    public HashMap<String,Node> dfs(HashMap<String,Node> subGraph, Node person){
+    	return resultMap;
     }
     
     public void printSubGraph(HashMap<String, Node> subGraph){
@@ -195,20 +207,6 @@ public class Graph {
      * Prints user and the friends they have
      */
     
-<<<<<<< HEAD
-    /*private String printList(String path){
-      String answer = "";
-      String delims = "[],";
-    	for(int i = 0; i<path.length(); i++){
-    		if(!(path.charAt(i)=='[' || path.charAt(i)==']' || path.charAt(i)==',')){
-    			answer+=path.charAt(i)+"--";
-    		}
-    	}
-      return answer;
-    }*/
-    	  
-
-=======
     private String printList(Node friend){
 	        Node ptr;
 	        String answer = "";
@@ -221,9 +219,8 @@ public class Graph {
 	        }
 	        return friend.data.name+" is friends with: "+answer;
     }
->>>>>>> 62ae90cc0229d5e4fc7f79c8f9320746d4581848
 
-    
+
     public String BFS(String source, String target){
     	Queue<ArrayList<String>> paths = new Queue<ArrayList<String>>();
     	ArrayList<String> path = new ArrayList<String>();
