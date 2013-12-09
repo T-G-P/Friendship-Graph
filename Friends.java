@@ -21,7 +21,7 @@ public class Friends{
         }
         return response;
     }
-    public static void main(String[] args) throws FileNotFoundException{
+    public static void main(String[] args) throws FileNotFoundException, NoSuchElementException{
        
         System.out.print("Enter the input file name => ");
         String graphFile = stdin.next();
@@ -37,6 +37,12 @@ public class Friends{
             	System.out.println("Enter the names and find the shortest path between them:");
             	String firstname = stdin.next().toLowerCase();
             	String secondname = stdin.next().toLowerCase();
+            	try{
+            		
+
+            	}catch(NoSuchElementException e){
+            		System.out.println("Enter valid names");
+            	}
             	System.out.println(graph.BFS(firstname, secondname));
             	
 
