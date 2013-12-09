@@ -274,9 +274,13 @@ public class Graph {
     
     public void connectors(){
         String connectors = "";
-    	ArrayList<String> visited = new ArrayList<String>();
+        //HashMap<String, Integer> dfsNum = new HashMap<String, Integer>();
+        //HashMap<String, Integer> backNum = new HashMap<String, Integer>();
+
+        ArrayList<String> visited = new ArrayList<String>();
         for(String name: graph.keySet()){
-        	if(!visited.contains(graph.get(name))){
+        	if(!visited.contains(graph.get(name).data.name)){
+        		System.out.println("starting new dfs: ");
         		DFS(graph.get(name), visited);
         		
        
@@ -289,11 +293,13 @@ public class Graph {
     	
     }
     private void DFS(Node v, ArrayList<String> visited){
+		visited.add(v.data.name);
+		System.out.println(v.data.name);
+
+
     	for(Node w = v.next; w!=null; w=w.next){
     		if(!visited.contains(w.data.name)){
-    			visited.add(w.data.name);
     			DFS(graph.get(w.data.name), visited);
-    			System.out.println(w.data.name);
     		
     		}
     	
