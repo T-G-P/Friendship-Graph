@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
+
 /**
 * Graph Class
 *
@@ -13,21 +14,21 @@ import java.util.StringTokenizer;
 
 public class Graph {
         Scanner sc;//being passed into constructor
-        HashMap<String, Node> graph, subGraph;
+        HashMap<String, Node> graph;
         
-        /**
-         * Constructor Method
-         */
-        public Graph(Scanner sc){
+    /**
+     * Constructor Method
+     */
+    public Graph(Scanner sc){
                 this.sc = sc;
         }        
         
         
         
-        /**
-         * This method has two loops, the first fills the hashtables with nodes containing a user object as the data.
-         * The second loop creates an linked list of each persons complete list of friends
-         */
+    /**
+     * This method has two loops, the first fills the hashtables with nodes containing a user object as the data.
+     * The second loop creates an linked list of each persons complete list of friends
+     */
     public void buildGraph(){
             int numPeople = Integer.parseInt(sc.nextLine());
             graph = new HashMap<String, Node>();
@@ -39,10 +40,10 @@ public class Graph {
                     String line = sc.nextLine();
                     line.toLowerCase();
                     Scanner lineSc = new Scanner(line).useDelimiter("\\s*\\|\\s*");
-                Node firstFriend = graph.get(lineSc.next());
-                Node firstFriendCopy = new Node(firstFriend.data,null);
-                Node secondFriend = graph.get(lineSc.next());
-                Node secondFriendCopy = new Node(secondFriend.data, null);
+                    Node firstFriend = graph.get(lineSc.next());
+                	Node firstFriendCopy = new Node(firstFriend.data,null);
+                	Node secondFriend = graph.get(lineSc.next());
+                	Node secondFriendCopy = new Node(secondFriend.data, null);
                     makeFriendships(firstFriend, secondFriendCopy);                 
                     makeFriendships(secondFriend, firstFriendCopy);
                     
@@ -52,31 +53,78 @@ public class Graph {
     }
     
     /**
-     * Creates a subgraph of friendships within a school.
+     * Creates a subgraph of friendships within a school and prints them out in graph input format. 
      * @param school
      */
-    public void subGraph(String school){
-            subGraph = new HashMap<String, Node>();
+    public HashMap<String,Node> subGraph(String school){
+            HashMap<String,Node> subGraph = new HashMap<String, Node>();
             for (String name: graph.keySet()){
                     if(graph.get(name).data.school != null && graph.get(name).data.school.equals(school)){
                             subGraph.put(name, scanFriends(school, graph.get(name)));
                     }
             }
-            
+            return subGraph;
     }
+    
+    
+    public void buildCliques(){
+    		
+    }
+    
+    public void printSubGraph(HashMap<String, Node> subGraph){
+
+        Stack<ArrayList<String>> qf = new Stack<ArrayList<String>>();
+        System.out.println(subGraph.size());
+        for (String name: subGraph.keySet()){
+        	char student;
+        	if (subGraph.get(name).data.school != null){
+        		student = 'y';
+        	} else {
+        		student = 'n';
+        	}
+        	if (student == 'n'){
+        		System.out.println(subGraph.get(name).data.name + "|" + student );
+        	} else {
+        		System.out.println(subGraph.get(name).data.name + "|" + student + "|" + subGraph.get(name).data.school );
+        	}
+        }
+        for (String friendAlpha: subGraph.keySet()){
+        	Node friendBeta = subGraph.get(friendAlpha);
+        	while(friendBeta.next != null){
+        		friendBeta = friendBeta.next;
+        		ArrayList<String> twoFriends = new ArrayList<>(2);
+        		twoFriends.add(friendAlpha);
+        		twoFriends.add(friendBeta.data.name);
+        		qf.push(twoFriends);
+        	}
+        	
+        }
+        while (!qf.empty()){
+        	ArrayList<String> test = qf.pop();
+        	ArrayList<String> reverse = new ArrayList<String>(2);
+        	reverse.add(test.get(1));
+        	reverse.add(test.get(0));
+        	if (!qf.contains(reverse)){
+        		System.out.println(reverse.get(0) + "|" + reverse.get(1));
+        	}
+        }
+        
+        
+    }
+    
     
     /**
      * 
      */
     public Node scanFriends(String school, Node person){
-    	if (person.next != null){
-    		person.next = scanFriends(school, person.next);
-    	}
-    	if (person.data.school != null && person.data.school.equals(school)){
-    		return person; 
-    	} else {
-    		return person.next;
-    	}
+    		if (person.next != null){
+    			person.next = scanFriends(school, person.next);
+    		}
+	    	if (person.data.school != null && person.data.school.equals(school)){
+	    		return person; 
+	    	} else {
+	    		return person.next;
+	    	}
     }
     
     
@@ -147,6 +195,7 @@ public class Graph {
      * Prints user and the friends they have
      */
     
+<<<<<<< HEAD
     /*private String printList(String path){
       String answer = "";
       String delims = "[],";
@@ -159,6 +208,20 @@ public class Graph {
     }*/
     	  
 
+=======
+    private String printList(Node friend){
+	        Node ptr;
+	        String answer = "";
+	        for(ptr=friend; ptr!=null; ptr=ptr.next){
+	                
+	                if(ptr==friend){
+	                        continue;
+	                }
+	                answer+=(ptr.data.name+" ");
+	        }
+	        return friend.data.name+" is friends with: "+answer;
+    }
+>>>>>>> 62ae90cc0229d5e4fc7f79c8f9320746d4581848
 
     
     public String BFS(String source, String target){

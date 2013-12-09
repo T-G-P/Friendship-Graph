@@ -32,8 +32,7 @@ public class Friends{
             if (option == '1') {
             	System.out.println ("Which school?");
             	String school = stdin.next().toLowerCase();
-                graph.subGraph(school);
-                graph.printGraph(graph.subGraph);
+                graph.printSubGraph(graph.subGraph(school));
             } else if (option == '2') {
             	System.out.println("Enter the names and find the shortest path between them:");
             	String firstname = stdin.next().toLowerCase();
