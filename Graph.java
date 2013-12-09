@@ -49,6 +49,7 @@ public class Graph {
                     makeFriendships(secondFriend, firstFriendCopy);
                     
             }
+            //printGraph(graph);
             
     }
     
@@ -273,22 +274,31 @@ public class Graph {
     
     public void connectors(){
         String connectors = "";
-    	ArrayList<Node> visited = new ArrayList<Node>();
+    	ArrayList<String> visited = new ArrayList<String>();
         for(String name: graph.keySet()){
         	if(!visited.contains(graph.get(name))){
-        		connector(graph.get(name));
+        		DFS(graph.get(name), visited);
+        		
        
         	}
         }
         
         
-        System.out.println(connectors);
+        System.out.println(visited.size());
     	
     	
     }
-    private Node connector(Node v){
+    private void DFS(Node v, ArrayList<String> visited){
+    	for(Node w = v.next; w!=null; w=w.next){
+    		if(!visited.contains(w.data.name)){
+    			visited.add(w.data.name);
+    			DFS(graph.get(w.data.name), visited);
+    			System.out.println(w.data.name);
+    		
+    		}
     	
-    	return null;
+        }
+    	return;
     }
 
 }
