@@ -270,5 +270,25 @@ public class Graph {
             
             return "No Path ExiZts";
     }
+    
+    public void connectors(){
+        String connectors = "";
+    	ArrayList<Node> visited = new ArrayList<Node>();
+        for(String name: graph.keySet()){
+        	if(!visited.contains(graph.get(name))){
+        		connector(graph.get(name));
+       
+        	}
+        }
+        
+        
+        System.out.println(connectors);
+    	
+    	
+    }
+    private Node connector(Node v){
+    	
+    	return null;
+    }
 
 }
