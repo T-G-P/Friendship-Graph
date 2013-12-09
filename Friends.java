@@ -31,18 +31,18 @@ public class Friends{
         while ((option = getOption()) != 'q') {
             if (option == '1') {
             	System.out.println ("Which school?");
-            	String school = stdin.next().toLowerCase();
+            	stdin.nextLine();
+            	String school = stdin.nextLine().toLowerCase();
+            	System.out.println(school);
                 graph.printSubGraph(graph.subGraph(school));
             } else if (option == '2') {
-            	System.out.println("Enter the names and find the shortest path between them:");
-            	String firstname = stdin.next().toLowerCase();
-            	String secondname = stdin.next().toLowerCase();
-            	System.out.println(graph.BFS(firstname, secondname));
-            	
+                System.out.print("2");
 
             } else if (option == '3') {
-                System.out.print("3");
-
+            	System.out.println("Which School?");
+            	stdin.nextLine();
+            	String school = stdin.nextLine().toLowerCase();
+                graph.buildCliques(graph.subGraph(school));
             } else if(option == '4') {
                 System.out.print("4 ");
 

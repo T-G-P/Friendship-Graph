@@ -70,17 +70,30 @@ public class Graph {
     public void buildCliques(HashMap<String,Node> subGraph){
     		int i = 1 ;
     		HashMap<String, Node> resultMap = new HashMap<String, Node>();
-    		for (String name: subGraph.keySet()){
+    		for (String name: subGraph.keySet()){    			
     			if (!visited.contains(subGraph.get(name))){
-    				resultMap = dfs(subGraph, subGraph.get(name));
-    				System.out.println("Clique" + i + " 1:");
-    				i++;
+    				dfs(subGraph, resultMap, subGraph.get(name));
+    				if(!resultMap.isEmpty()){
+	    				System.out.println("Clique " + i + ":");
+	    				printSubGraph(resultMap);
+	    				resultMap.clear();
+	    				i++;
+    				}
     			}
     		}
     }	
     
-    public HashMap<String,Node> dfs(HashMap<String,Node> subGraph, Node person){
-    	return resultMap;
+    public void dfs(HashMap<String,Node> subGraph, HashMap<String,Node> resultMap , Node person){
+    	
+    	if (!visited.contains(person.data.name)){
+    		Node keyFriend = new Node(person.data, person.next);
+    		resultMap.put(person.data.name, keyFriend);
+    		visited.add(person.data.name);
+    		while (keyFriend.next != null){
+    			dfs(subGraph, resultMap, subGraph.get(keyFriend.next.data.name));
+    			keyFriend = keyFriend.next;
+    		}
+    	} 
     }
     
     public void printSubGraph(HashMap<String, Node> subGraph){
@@ -104,7 +117,7 @@ public class Graph {
         	Node friendBeta = subGraph.get(friendAlpha);
         	while(friendBeta.next != null){
         		friendBeta = friendBeta.next;
-        		ArrayList<String> twoFriends = new ArrayList<>(2);
+        		ArrayList<String> twoFriends = new ArrayList<String>(2);
         		twoFriends.add(friendAlpha);
         		twoFriends.add(friendBeta.data.name);
         		qf.push(twoFriends);
