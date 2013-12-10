@@ -318,7 +318,11 @@ public class Graph {
     			}
     			if(v.dfsnum<=graph.get(w.data.name).backnum){
     				if(v.data.name!=startDFS && !connectors.contains(v.data.name)){
+    					
     					connectors.add(v.data.name);	
+    				}
+    				if(v.data.name.equals(startDFS)){
+    					connectors.add(v.data.name);
     				}
     			}
     			
