@@ -1,6 +1,7 @@
 import java.util.NoSuchElementException;
 
 public class Queue<T> {
+        
         private SeshNode<T> rear;
         private int size;
         

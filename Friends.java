@@ -36,7 +36,10 @@ public class Friends{
             	System.out.println(school);
                 graph.printSubGraph(graph.subGraph(school));
             } else if (option == '2') {
-                System.out.print("2");
+            	 System.out.println("Enter the names and find the shortest path between them:");
+                 String firstname = stdin.next().toLowerCase();
+                 String secondname = stdin.next().toLowerCase();
+                 System.out.println(graph.BFS(firstname, secondname));
 
             } else if (option == '3') {
             	System.out.println("Which School?");
@@ -44,7 +47,7 @@ public class Friends{
             	String school = stdin.nextLine().toLowerCase();
                 graph.buildCliques(graph.subGraph(school));
             } else if(option == '4') {
-                System.out.print("4 ");
+                graph.connectors();
 
             }
             else{
