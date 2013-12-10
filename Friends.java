@@ -30,15 +30,34 @@ public class Friends{
         char option;
         while ((option = getOption()) != 'q') {
             if (option == '1') {
-                System.out.print("1");
+                    System.out.println ("Which school?");
+                    stdin.nextLine();
+                    String school = stdin.nextLine().toLowerCase();
+                    System.out.println(school);
+                    graph.printSubGraph(graph.subGraph(school));
+                    System.out.println();
+
             } else if (option == '2') {
-                System.out.print("2");
+                 System.out.println("Enter the names and find the shortest path between them:");
+                 String firstname = stdin.next().toLowerCase();
+                 String secondname = stdin.next().toLowerCase();
+                 System.out.println();
+                 System.out.println(graph.BFS(firstname, secondname));
+                 System.out.println();
+
 
             } else if (option == '3') {
-                System.out.print("3");
+                    System.out.println("Which School?");
+                    stdin.nextLine();
+                    String school = stdin.nextLine().toLowerCase();
+                    System.out.println();
+                    graph.buildCliques(graph.subGraph(school));
+                    System.out.println();
 
             } else if(option == '4') {
-                System.out.print("4 ");
+                System.out.println();
+            	graph.connectors();
+            	System.out.println();
 
             }
             else{
@@ -48,10 +67,5 @@ public class Friends{
         }
 
     }
-	
+        
 }
-
-
-
-
-
