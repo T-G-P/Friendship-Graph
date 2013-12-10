@@ -15,8 +15,12 @@ import java.util.StringTokenizer;
 public class Graph {
         Scanner sc;//being passed into constructor
         HashMap<String, Node> graph;
-                ArrayList<String> visited = new ArrayList<String>();
+        ArrayList<String> visited = new ArrayList<String>();
+        ArrayList<String> connectors;
+        int dfsnum;
+        String startDFS;
         
+        //static int backnum;
     /**
 * Constructor Method
 */
@@ -273,34 +277,54 @@ public class Graph {
     }
     
     public void connectors(){
-        String connectors = "";
         //HashMap<String, Integer> dfsNum = new HashMap<String, Integer>();
         //HashMap<String, Integer> backNum = new HashMap<String, Integer>();
-
+    	connectors = new ArrayList<String>();
+    	String result = "";
+    	
         ArrayList<String> visited = new ArrayList<String>();
         for(String name: graph.keySet()){
         	if(!visited.contains(graph.get(name).data.name)){
-        		System.out.println("starting new dfs: ");
-        		DFS(graph.get(name), visited);
+        		System.out.println("starting new dfs with: "+name);
+        		startDFS = name;
+        		nodeDFS(graph.get(name), visited);
         		
        
         	}
         }
         
         
-        System.out.println(visited.size());
-    	
+        //System.out.println(visited.size());
+    	for(String connector: connectors){
+    		result+=(connector+", ");
+    	}
+    	result = result.substring(0,result.length()-2);
+    	System.out.print(result);
     	
     }
-    private void DFS(Node v, ArrayList<String> visited){
+    private void nodeDFS(Node v, ArrayList<String> visited){
 		visited.add(v.data.name);
-		System.out.println(v.data.name);
+		v.dfsnum = dfsnum++;
+		v.backnum = v.dfsnum;
+		
+		//System.out.println(v.data.name);
 
 
     	for(Node w = v.next; w!=null; w=w.next){
     		if(!visited.contains(w.data.name)){
-    			DFS(graph.get(w.data.name), visited);
-    		
+    			nodeDFS(graph.get(w.data.name), visited);
+    			if(v.dfsnum > graph.get(w.data.name).backnum){
+    				v.backnum = Math.min(v.backnum, graph.get(w.data.name).backnum);
+    			}
+    			if(v.dfsnum<=graph.get(w.data.name).backnum){
+    				if(v.data.name!=startDFS && !connectors.contains(v.data.name)){
+    					connectors.add(v.data.name);	
+    				}
+    			}
+    			
+    		}
+    		else{
+    			v.backnum = Math.min(v.backnum, graph.get(w.data.name).dfsnum);
     		}
     	
         }
